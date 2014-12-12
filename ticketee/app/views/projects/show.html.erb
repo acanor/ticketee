@@ -9,3 +9,11 @@
 				data: {	confirm:
 								"Are you sure you want to delete this project?"
 						} %>
+
+<ul id='tickets'>
+	<% @project.tickets.each do |ticket| %>
+		<li>
+			#<%= link_to ticket.title, [@project, ticket] %>
+		</li>
+	<% end %>
+</ul>
