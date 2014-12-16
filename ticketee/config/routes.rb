@@ -1,4 +1,5 @@
 Ticketee::Application.routes.draw do
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -17,6 +18,9 @@ Ticketee::Application.routes.draw do
   resources :projects do
 	resources :tickets
   end
+
+  resources :users
+
   # Example resource route with options:
   #   resources :products do
   #     member do
