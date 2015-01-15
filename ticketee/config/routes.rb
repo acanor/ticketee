@@ -21,7 +21,10 @@ Ticketee::Application.routes.draw do
 
   resources :users
 
-  # Example resource route with options:
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
+
+# Example resource route with options:
   #   resources :products do
   #     member do
   #       get 'short'
