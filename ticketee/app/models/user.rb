@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 	end
 
 	validates :email, presence: true
+	has_many :permissions
 end
