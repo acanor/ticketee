@@ -1,8 +1,13 @@
 Ticketee::Application.routes.draw do
   
   namespace :admin do
-  	root :to => "base#index"
-	resources :users
+  	root to: "base#index"
+	resources :users do
+		resources :permissions
+		
+		put "permissions", to: "permissions#set",
+								 as: "set_permissions"	  
+	end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -28,6 +33,8 @@ Ticketee::Application.routes.draw do
 
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
+
+  delete "/signout", to: "sessions#destroy", as: "signout"
 
 # Example resource route with options:
   #   resources :products do
@@ -68,4 +75,5 @@ Ticketee::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end

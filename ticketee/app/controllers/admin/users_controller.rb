@@ -27,7 +27,7 @@ class Admin::UsersController < Admin::BaseController
 	end
 	
 	def edit
-	end if
+	end 
 
 	def update
 		if params[:user][:password].blank?
