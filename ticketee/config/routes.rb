@@ -29,6 +29,10 @@ Ticketee::Application.routes.draw do
 	resources :tickets
   end
 
+  resources :tickets do
+	resources :comments
+  end
+
   resources :users
 
   get "/signin", to: "sessions#new"
@@ -77,4 +81,6 @@ Ticketee::Application.routes.draw do
   #   end
 	
 	resources :files
+
+	
 end

@@ -46,6 +46,9 @@ class TicketsController < ApplicationController
 		redirect_to @project
 	end
 
+	def show
+		@comment = @ticket.comments.build
+	end
 	private
 		def set_project
 			@project = Project.for(current_user).find(params[:project_id])
