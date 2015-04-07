@@ -1,19 +1,11 @@
 <div id='ticket'>
 	<h2><%= @ticket.title %></h2>
-	<span id='author'>Created by <%= @ticket.user.email %></span>
-	<%= authorized?("edit tickets", @project) do %>
-		<%= link_to "Edit Ticket", [:edit, @project, @ticket] %>|
-	<% end %>
-	<% authorized?("delete tickets", @project) do %>
-		<%= link_to "Delete Ticket", [@project, @ticket], method: :delete, 
-		data: { confirm: "Are you sure want to delete this ticket?" } %>
-	<% end %>
-	<br>
-	<small>Created by <%= @ticket.user.email %></small>
 
 	<%= simple_format(@ticket.description) %>
-
-	<% if @ticket.assets.exists? %>
+	<span id='author'>Created by <%= @ticket.user.email %></span>
+	<%= render @ticket.state if @ticket.state %>
+	
+	<% if @ticket.assets.present? %>
 		<h3>Attached Files</h3>
 		<div class="assets">
 			<% @ticket.assets.each do |asset| %>
@@ -28,6 +20,18 @@
 		</div>
 	<% end %>
 	
+	<%= authorized?("edit tickets", @project) do %>
+		<%= link_to "Edit Ticket", [:edit, @project, @ticket] %>|
+	<% end %>
+	<% authorized?("delete tickets", @project) do %>
+		<%= link_to "Delete Ticket", [@project, @ticket], method: :delete, 
+		data: { confirm: "Are you sure want to delete this ticket?" } %>
+	<% end %>
+	<br>
+	<small>Created by <%= @ticket.user.email %></small>
+</div>	
+
+
 	<h3>Comments</h3>
 	<div id='comments'>
 		<% if @ticket.comments.exists? %>
