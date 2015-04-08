@@ -4,8 +4,11 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   
   belongs_to :state
+
+  belongs_to :previus_state, class_name: "State"
   validates :text, presence: true
   
+  before_create :set_previus_state
   after_create :set_ticket_state
 
   delegate :project, to: :ticket
@@ -15,5 +18,9 @@ class Comment < ActiveRecord::Base
 	def set_ticket_state
 		self.ticket.state = self.state
 		self.ticket.save!
+	end
+
+	def set_previus_state
+		self.previus_state = ticket.state
 	end
 end
